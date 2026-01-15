@@ -52,10 +52,6 @@ npm install
    # Or use MongoDB Atlas (cloud)
    ```
 
-2. **Update `.env` file** (create from `.env.example`):
-   ```env
-   MONGODB_URI=mongodb://localhost:27017/todoapp
-   PORT=3001
    ```
 
 ### Running the Application
