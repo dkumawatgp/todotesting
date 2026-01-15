@@ -63,7 +63,7 @@ router.post('/', async (req, res) => {
     }
 
     const todo = await Todo.create({
-      text: text.trim(),         /////////////////////////////////////////////////////////////
+      text: text.trim(),         /////////////////////////////////////////////////////////////trim fuction
       completed: false,
     })
 
