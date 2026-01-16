@@ -62,9 +62,22 @@ router.post('/', async (req, res) => {
       })
     }
 
+    // Validate deadline if provided
+    let deadlineDate = null
+    if (req.body.deadline) {
+      deadlineDate = new Date(req.body.deadline)
+      if (isNaN(deadlineDate.getTime())) {
+        return res.status(400).json({
+          success: false,
+          error: 'Invalid deadline date format',
+        })
+      }
+    }
+
     const todo = await Todo.create({
-      text: text.trim(),         /////////////////////////////////////////////////////////////trim fuction
+      text: text.trim(), /////////////////////////////////////////////////////////////trim fuction
       completed: false,
+      deadline: deadlineDate,
     })
 
     res.status(201).json({
@@ -88,7 +101,7 @@ router.post('/', async (req, res) => {
 // PUT /api/todos/:id - Update a todo
 router.put('/:id', async (req, res) => {
   try {
-    const { text, completed } = req.body
+    const { text, completed, deadline } = req.body
     const updateData = {}
 
     if (text !== undefined) {
@@ -103,6 +116,21 @@ router.put('/:id', async (req, res) => {
 
     if (completed !== undefined) {
       updateData.completed = Boolean(completed)
+    }
+
+    if (deadline !== undefined) {
+      if (deadline === null || deadline === '') {
+        updateData.deadline = null
+      } else {
+        const deadlineDate = new Date(deadline)
+        if (isNaN(deadlineDate.getTime())) {
+          return res.status(400).json({
+            success: false,
+            error: 'Invalid deadline date format',
+          })
+        }
+        updateData.deadline = deadlineDate
+      }
     }
 
     const todo = await Todo.findByIdAndUpdate(

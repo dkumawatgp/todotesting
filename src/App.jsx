@@ -25,6 +25,7 @@ function App() {
         text: todo.text,
         completed: todo.completed,
         createdAt: todo.createdAt,
+        deadline: todo.deadline,
       })))
     } catch (err) {
       setError('Failed to load todos. Make sure the server is running.')
@@ -34,14 +35,15 @@ function App() {
     }
   }
 
-  const addTodo = async (text) => {
+  const addTodo = async (text, deadline) => {
     try {
-      const newTodo = await todoAPI.createTodo(text)
+      const newTodo = await todoAPI.createTodo(text, deadline)
       setTodos([...todos, {
         id: newTodo._id,
         text: newTodo.text,
         completed: newTodo.completed,
         createdAt: newTodo.createdAt,
+        deadline: newTodo.deadline,
       }])
     } catch (err) {
       setError('Failed to add todo')
@@ -65,13 +67,13 @@ function App() {
     }
   }
 
-  const editTodo = async (id, newText) => {
+  const editTodo = async (id, newText, deadline = null) => {
     try {
-      const updatedTodo = await todoAPI.editTodo(id, newText)
+      const updatedTodo = await todoAPI.editTodo(id, newText, deadline)
       setTodos(
         todos.map((todo) =>
           todo.id === id
-            ? { ...todo, text: updatedTodo.text }
+            ? { ...todo, text: updatedTodo.text, deadline: updatedTodo.deadline }
             : todo
         )
       )

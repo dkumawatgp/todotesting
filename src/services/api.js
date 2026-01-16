@@ -43,8 +43,8 @@ class TodoAPI {
     return response.data
   }
 
-  async createTodo(text) {
-    const response = await apiClient.post('/todos', { text })
+  async createTodo(text, deadline = null) {
+    const response = await apiClient.post('/todos', { text, deadline })
     return response.data
   }
 
@@ -53,8 +53,8 @@ class TodoAPI {
     return response.data
   }
 
-  async editTodo(id, text) {
-    const response = await apiClient.put(`/todos/${id}`, { text })
+  async editTodo(id, text, deadline = null) {
+    const response = await apiClient.put(`/todos/${id}`, { text, deadline })
     return response.data
   }
 

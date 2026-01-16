@@ -148,16 +148,16 @@ describe('Todo API Tests', () => {
     })
 
     it('should return 404 if todo not found', async () => {
-      // 🔌 STUB: Create a fake ID that doesn't exist
+      // STUB: Create a fake ID that doesn't exist
       //    - This provides a predefined invalid ID to test error handling
       const fakeId = new mongoose.Types.ObjectId()
 
-      // 🚗 DRIVER: Calls API with stub (fake) ID and verifies error response
+      // DRIVER: Calls API with stub (fake) ID and verifies error response
       const response = await request(app)
         .get(`/api/todos/${fakeId}`)
         .expect(404)
 
-      // 🚗 DRIVER: Verifies error handling works correctly
+      // DRIVER: Verifies error handling works correctly
       expect(response.body.success).toBe(false)
       expect(response.body.error).toBe('Todo not found')
     })
@@ -280,19 +280,19 @@ describe('Todo API Tests', () => {
 
   describe('DELETE /api/todos/:id', () => {
     it('should delete a todo', async () => {
-      // 🔌 STUB: Create fake todo for deletion test
+      //  STUB: Create fake todo for deletion test
       const todo = await Todo.create({ text: 'Todo to delete', completed: false })
 
-      // 🚗 DRIVER: Calls DELETE endpoint
+      //  DRIVER: Calls DELETE endpoint
       const response = await request(app)
         .delete(`/api/todos/${todo._id}`)
         .expect(200)
 
-      // 🚗 DRIVER: Verifies deletion response
+      //  DRIVER: Verifies deletion response
       expect(response.body.success).toBe(true)
       expect(response.body.message).toBe('Todo deleted successfully')
 
-      // 🚗 DRIVER: Verifies todo is actually deleted from database
+      //  DRIVER: Verifies todo is actually deleted from database
       const deletedTodo = await Todo.findById(todo._id)
       expect(deletedTodo).toBeNull()
     })
@@ -346,12 +346,12 @@ describe('Todo API Tests', () => {
 
   describe('Integration: Full CRUD workflow', () => {
     it('should complete a full CRUD workflow', async () => {
-      // 🚗 DRIVER: Orchestrates complete workflow
+      // DRIVER: Orchestrates complete workflow
       //    This test acts as a driver that calls multiple endpoints
       //    and verifies the entire CRUD cycle
       
-      // 🔌 STUB: Test data for creation
-      // 🚗 DRIVER: CREATE - Calls POST endpoint
+      // STUB: Test data for creation
+      //  DRIVER: CREATE - Calls POST endpoint
       const createResponse = await request(app)
         .post('/api/todos')
         .send({ text: 'Workflow Todo' })
@@ -359,14 +359,14 @@ describe('Todo API Tests', () => {
 
       const todoId = createResponse.body.data._id
 
-      // 🚗 DRIVER: READ - Calls GET endpoint and verifies
+      //  DRIVER: READ - Calls GET endpoint and verifies
       const readResponse = await request(app)
         .get(`/api/todos/${todoId}`)
         .expect(200)
 
       expect(readResponse.body.data.text).toBe('Workflow Todo')
 
-      // 🚗 DRIVER: UPDATE - Calls PUT endpoint and verifies
+      // DRIVER: UPDATE - Calls PUT endpoint and verifies
       const updateResponse = await request(app)
         .put(`/api/todos/${todoId}`)
         .send({ completed: true })
@@ -374,12 +374,12 @@ describe('Todo API Tests', () => {
 
       expect(updateResponse.body.data.completed).toBe(true)
 
-      // 🚗 DRIVER: DELETE - Calls DELETE endpoint
+      //  DRIVER: DELETE - Calls DELETE endpoint
       await request(app)
         .delete(`/api/todos/${todoId}`)
         .expect(200)
 
-      // 🚗 DRIVER: VERIFY - Calls GET to verify deletion
+      // DRIVER: VERIFY - Calls GET to verify deletion
       const deletedResponse = await request(app)
         .get(`/api/todos/${todoId}`)
         .expect(404)
