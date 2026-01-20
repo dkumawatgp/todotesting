@@ -3,7 +3,6 @@ import Todo from '../models/Todo.js'
 
 const router = express.Router()
 
-// GET /api/todos - Get all todos
 router.get('/', async (req, res) => {
   try {
     const todos = await Todo.find().sort({ createdAt: -1 })
@@ -20,7 +19,6 @@ router.get('/', async (req, res) => {
   }
 })
 
-// GET /api/todos/:id - Get a single todo
 router.get('/:id', async (req, res) => {
   try {
     const todo = await Todo.findById(req.params.id)
@@ -50,7 +48,6 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-// POST /api/todos - Create a new todo
 router.post('/', async (req, res) => {
   try {
     const { text } = req.body
@@ -73,7 +70,7 @@ router.post('/', async (req, res) => {
         })
       }
     }
-
+//change here
     const todo = await Todo.create({
       text: text.trim(), /////////////////////////////////////////////////////////////trim fuction
       completed: false,
@@ -98,7 +95,6 @@ router.post('/', async (req, res) => {
   }
 })
 
-// PUT /api/todos/:id - Update a todo
 router.put('/:id', async (req, res) => {
   try {
     const { text, completed, deadline } = req.body
@@ -173,7 +169,6 @@ router.put('/:id', async (req, res) => {
   }
 })
 
-// PATCH /api/todos/:id/toggle - Toggle todo completion status
 router.patch('/:id/toggle', async (req, res) => {
   try {
     const todo = await Todo.findById(req.params.id)
@@ -206,7 +201,6 @@ router.patch('/:id/toggle', async (req, res) => {
   }
 })
 
-// DELETE /api/todos/:id - Delete a todo
 router.delete('/:id', async (req, res) => {
   try {
     const todo = await Todo.findByIdAndDelete(req.params.id)
@@ -237,7 +231,6 @@ router.delete('/:id', async (req, res) => {
   }
 })
 
-// DELETE /api/todos - Delete all completed todos
 router.delete('/', async (req, res) => {
   try {
     const result = await Todo.deleteMany({ completed: true })

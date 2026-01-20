@@ -2,39 +2,6 @@
 
 A modern React todo application built with Vite, designed for practicing different types of testing: Unit Testing, Integration Testing, End-to-End (E2E) Testing, and **API Testing**.
 
-## Features
-
-- ✅ Add new todos
-- ✅ Toggle todo completion
-- ✅ Delete individual todos
-- ✅ Clear all completed todos
-- ✅ View todo statistics (Total, Active, Completed)
-- 🎨 Beautiful, modern UI with gradient design
-- 🔌 RESTful API backend with MongoDB
-- 🧪 Comprehensive API testing examples
-
-## Tech Stack
-
-### Frontend
-- **React 18** - UI library
-- **Vite** - Build tool and dev server
-- **Vitest** - Unit and integration testing
-- **React Testing Library** - Component testing utilities
-- **Cypress** - E2E testing framework
-
-### Backend
-- **Node.js** - Runtime environment
-- **Express** - Web framework
-- **MongoDB** - Database
-- **Mongoose** - MongoDB ODM
-- **Supertest** - API testing
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js (v18 or higher)
-- MongoDB (local installation or MongoDB Atlas account)
 
 ### Installation
 
@@ -42,19 +9,6 @@ A modern React todo application built with Vite, designed for practicing differe
 npm install
 ```
 
-### Setup MongoDB
-
-1. **Local MongoDB**: Make sure MongoDB is running locally
-   ```bash
-   # macOS with Homebrew
-   brew services start mongodb-community
-   
-   # Or use MongoDB Atlas (cloud)
-   ```
-
-   ```
-
-### Running the Application
 
 **Option 1: Run frontend and backend separately**
 
@@ -96,11 +50,6 @@ Unit tests focus on testing individual components in isolation.
 **Run unit tests:**
 ```bash
 npm test
-```
-
-**Run tests with UI:**
-```bash
-npm run test:ui
 ```
 
 **Run tests with coverage:**
@@ -158,15 +107,15 @@ npm run test:api
 - `server/__tests__/health.test.js` - Health check endpoint tests
 
 **API Test Coverage:**
-- ✅ GET /api/todos - Get all todos
-- ✅ GET /api/todos/:id - Get single todo
-- ✅ POST /api/todos - Create todo
-- ✅ PUT /api/todos/:id - Update todo
-- ✅ PATCH /api/todos/:id/toggle - Toggle todo completion
-- ✅ DELETE /api/todos/:id - Delete single todo
-- ✅ DELETE /api/todos - Delete all completed todos
-- ✅ Error handling and validation
-- ✅ Full CRUD workflow integration
+-  GET /api/todos - Get all todos
+-  GET /api/todos/:id - Get single todo
+-  POST /api/todos - Create todo
+-  PUT /api/todos/:id - Update todo
+-  PATCH /api/todos/:id/toggle - Toggle todo completion
+-  DELETE /api/todos/:id - Delete single todo
+-  DELETE /api/todos - Delete all completed todos
+-  Error handling and validation
+-  Full CRUD workflow integration
 
 ## API Endpoints
 
@@ -217,47 +166,3 @@ http://localhost:3001/api
   "error": "Error message"
 }
 ```
-
-## Project Structure
-
-```
-TestingProject/
-├── server/
-│   ├── __tests__/          # API tests
-│   │   ├── todoRoutes.test.js
-│   │   └── health.test.js
-│   ├── models/             # MongoDB models
-│   │   └── Todo.js
-│   ├── routes/              # API routes
-│   │   └── todoRoutes.js
-│   └── index.js            # Server entry point
-├── src/
-│   ├── components/
-│   │   ├── __tests__/      # Unit tests
-│   │   ├── AddTodo.jsx
-│   │   ├── TodoItem.jsx
-│   │   └── TodoList.jsx
-│   ├── __tests__/          # Integration tests
-│   ├── services/           # API service
-│   │   └── api.js
-│   ├── App.jsx
-│   └── main.jsx
-├── cypress/
-│   ├── e2e/                # E2E tests
-│   └── support/
-├── package.json
-├── vite.config.js
-├── cypress.config.js
-└── .env                    # Environment variables
-```
-
-## Learning Resources
-
-This project is designed to help you practice:
-
-1. **Unit Testing**: Testing individual components and functions
-2. **Integration Testing**: Testing how components work together
-3. **E2E Testing**: Testing complete user workflows
-4. **API Testing**: Testing REST API endpoints with Supertest
-
-Each test file includes comments and examples to help you understand different testing patterns and best practices.
